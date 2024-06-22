@@ -83,17 +83,24 @@ The following images display the web application's appearance and functionality:
 
 
 ## Usage & Instructions
-    1. Open integrated terminal on index.js
-    2. Enter “node index.js” in the command line
-    3. The user will be presented with npm inquirer questions
-    4. State your choices to the options provided
-    5. Once completed a SVG file named “logo.svg” will be created
+    1. Clone a copy of this repo to your local machine
+    2. Install the packages below to practice connecting to your server and databases
+    3. Open the integrated terminal in your code editor
+    4. Make sure you're in the correct path, copy the 'parent folder' that your .sql files live in
+    4. Connect to your POSTGRES SERVER by entering the command 'psql -U postgres' and password you created when initially installed the Postgres 'local' server
+    5. Run the command \list to see what databases you have already
+    6. Practice executing the statments listed inside the schema.sql file, an automated process, by executing the command \i schema.sql
+    7. \list to view the NEWLY created database 'sample_db;'
+    \c sample_db; to change to that database \c postgres to change back to postgres  
+    \q to quit and exit the postgres or any databas eyou're in 
+
+  
 
 ### Technical Details
     > Node Package Manager
-    > Express Node JS Framework
-    > Inquirer@8.2.4
-    > PG Package
+    > Express - Node JS Framework
+    > Inquirer@8.2.4 - NPM package
+    > PG Package - a non-blocking PostgreSQL client for Node.js
     > Postgres
     > SQL
 
