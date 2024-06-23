@@ -1,3 +1,4 @@
+
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
 INSERT INTO department (name)
@@ -21,21 +22,14 @@ INSERT INTO role (title, salary, department_id) VALUES
             ('Runner', '60000', 6);
             
 
-
 -- inserts data into my employees table 
 INSERT INTO employee (first_name, last_name)
   VALUES    ('Rhianna', 'Wilson'),
             ('Jessica', 'Walker'),
-            ('Peter', 'Matthews');
-
--- Web development 'John Jones'),
-   --         ('Jessica', 'Walker', 'Accountant', 'Finance', '110000', 'Max Gerald'),
-     --       ('Peter', 'Matthews', 'Customer Service Rep', 'Customer Service', '80000', 'Sarah James');
-
-
-
--- -- WHEN add a department
--- -- WHEN I choose to add a role
--- -- WHEN I choose to add an employee
--- -- WHEN I choose to update an employee role 
-
+            ('Peter', 'Matthews'),
+            ('Jack', 'Williams'),
+            ('George', 'Peters'),
+            ('Jane', 'Doe'),
+            ('Sarah', 'Southland'),
+            ('Matt', 'Jeffery'),
+            ('Manuela', 'Tiang');

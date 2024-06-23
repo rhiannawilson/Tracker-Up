@@ -81,3 +81,10 @@ and that employee is added to the database
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role 
 this information is updated in the database
+
+
+        "express": "^4.19.2",
+        "inquirer": "^8.2.4",
+        "node": "^20.15.0",
+        "pg": "^8.12.0",
+        "prompt-sync": "^4.2.0"

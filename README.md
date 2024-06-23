@@ -22,11 +22,7 @@ This assignment is not deployed and was submitted as requested via video demonst
 
 ## Directory Structure
 ```  
-├── Assets/ *repo images*
-├── examples/ 
-    ├── example_circle.svg   
-    ├── example_square.svg
-    ├── example_triangle.svg    
+├── Assets/ 
 ├── lib/                
     ├── shapes.js       
     ├── shapes.test.js  
