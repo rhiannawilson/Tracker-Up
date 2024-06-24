@@ -1,383 +1,22 @@
-// const {prompt} = require('inquirer');
-// const logo = require('asciiart-logo');
- // const config = require('./package.json');
-// console.log(logo(config).render());
-// const db = require ('./develop/server');
-// const colors = require('colors'); // Assuming you use colors for styling
 
-
-
-// // display logo text, load main prompts
-// function init() {
-//     const logoText = logo({name: 'Tracker Up Employee Manager'}).render();
-
-//     console.log(logoText);
-
-//     loadMainPrompts();
-// }
-
-
-
-// function loadMainPrompts () {
-//     prompt([
-//         {
-//             type: 'list',
-//             name: 'choice',
-//             message: colors.brightMagenta ('What would you like to do?'),
-//             choices: [
-//                 {
-//                     name: 'View all employees',
-//                     value: 'VIEW_EMPLOYEES',
-//                 },
-//                 {
-//                     name: 'View all departments',
-//                     value: 'VIEW_DEPARTMENTS',
-//                 },
-//                 {
-//                     name: 'View all employees by departments',
-//                     value: 'VIEW_EMPLOYEE_BY_DEPARTMENTS',
-//                 },
-//                 {
-//                     name: 'View all roles',
-//                     value: 'VIEW_ROLES',
-//                 },
-//                 {
-//                     name: 'Add Department',
-//                     value: 'ADD_DEPARTMENT',
-//                 },
-//                 {
-//                     name: 'Add Role',
-//                     value: 'ADD_ROLE',
-//                 },
-//                 {
-//                     name: 'Add Employee',
-//                     value: 'ADD_EMPLOYEE',
-//                 },
-//                 {
-//                     name: 'Update an employee',
-//                     value: 'UPDATE_AN_EMPLOYEE',
-//                 },
-//                 {
-//                     name: 'Remove Employee',
-//                     value: 'REMOVE_EMPLOYEE',
-//                 },
-//                 {
-//                     name:'Quit',
-//                     value: 'QUIT',
-//                 },
-//             ],
-//         },
-//     ]).then((res) => {
-//         let choice =res.choice;
-//         // call the appropriate function depending on what the user chooses
-//         switch (choice) {
-//             case 'VIEW_EMPLOYEES': 
-//                 viewEmployees();
-//                 break;
-//             case 'VIEW_DEPARTMENTS': 
-//                 viewDepartments();
-//                 break;
-//             case 'VIEW_ROLES': 
-//                 viewRoles();
-//                 break;
-//             case 'ADD_DEPARTMENT': 
-//                 addDepartment();
-//                 break;
-//             case 'ADD_ROLE': 
-//                 addRole();
-//                 break;
-//             case 'ADD_EMPLOYEE': 
-//                 addEmployee();
-//                 break;
-//             case 'UPDATE_AN_EMPLOYEE': 
-//                 updateAnEmployee();
-//                 break;
-//             case 'REMOVE_EMPLOYEE': 
-//                 removeAnEmployee();
-//                 break;
-//         }
-//     })
-// }
-
-// // VIEW ALL EMPLOYEES
-
-// function viewEmployees() {
-//     db.findAllEmployees()
-//     .then(({rows  }) => {
-//         let employee = rows;
-//         console.log('/n');
-//         console.table(employee)
-//     })
-//     .then(() => loadMainPrompts)
-// }
-
-// // VIEW ALL DEPARTMENT
-
-// function viewDepartments() {
-//     db.findAllDepartments()
-//     .then(({ rows }) => {
-//         let department = rows;
-//         console.log('\n');
-//         console.table(department);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-
-// // VIEW ALL EMPLOYEES THAT BELONG TO A DEPARTMENT
-
-// function viewEmployeesByDepartment() {
-//     db.findAllEmployeesByDepartment()
-//     .then(({ rows }) => {
-//         let employee = rows;
-//         console.log('\n');
-//         console.table(employee);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-// // is the above this:  .then(loadMainPrompts); OR
-// // .then(()=> loadMainPrompts());
-
-// // VIEW ALL ROLES
-
-// function viewRoles() {
-//     db.findAllRoles()
-//     .then(({ rows }) => {
-//         let department = rows;
-//         console.log('\n');
-//         console.table(department);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-// // ADD A DEPARTMENT VERSION 1
-// function addDepartment() {
-//     db.findAllDepartments()
-//     .then(({ rows }) => {
-//         let department = rows;
-//         console.log('\n');
-//         console.table(department);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-// // ADD A DEPARTMENT VERSION 2
-// // function addDepartment() {
-// //     const name = prompt('What is the name of the department? ');
-// //     return name;
-// // }
-// // function main() {
-// //     const departmentName = addDepartment();
-// //     // Here you can use departmentName as needed, e.g., save it to a database, print it, etc.
-// //     console.log(`Department "${departmentName}" added successfully.`);
-// // }
-
-// // ADD A ROLE
-// function addRole() {
-//     db.findAllRoles()
-//     .then(({ rows }) => {
-//         let role = rows;
-//         console.log('\n');
-//         console.table(role);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-// // ADD EMPLOYEE VERSION 2
-// function addEmployee() {
-//     const name = prompt('What is the name of the employee? ');
-//     const role = prompt('What is the role of the employee? ');
-//     const departmentId = prompt('What is the department ID of the employee? '); // Assuming you need department ID for employee
-
-//     // You can add additional prompts for other employee details as needed
-
-//     return { name, role, departmentId };
-// }
-
-// // Example usage:
-// function main() {
-//     const newEmployee = addEmployee();
-//     console.log('New Employee Details:');
-//     console.log(newEmployee);
-//     // Save newEmployee to database or perform other actions
-// }
-
-// main(); // Call main to start the process
-
-
-
-// // Update an Employee
-// function updateAnEmployee() {
-//     db.findAllEmployees()
-//     .then(({ rows }) => {
-//         let employee = rows;
-//         console.log('\n');
-//         console.table(employee);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-// // Remove an Employee
-// function removeAnEmployee() {
-//     db.findAllEmployees()
-//     .then(({ rows }) => {
-//         let employee = rows;
-//         console.log('\n');
-//         console.table(employee);
-//     })
-//     .then(loadMainPrompts);
-// }
-
-
-
-
-// // inquirer
-// //   .prompt([
-// //     {
-// //       type: 'input',
-// //       name: 'name',
-// //       message: colors.brightMagenta('What is your name?'),
-// //     },
-// //     {
-// //       type: 'checkbox',
-// //       message: colors.brightMagenta('What languages do you know?'),
-// //       name: 'stack',
-// //       choices: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
-// //     },
-// //     {
-// //       type: 'list',
-// //       message: colors.brightMagenta('What is your preferred method of communication?'),
-// //       name: 'contact',
-// //       choices: ['email', 'phone', 'telekinesis'],
-// //     },
-// //   ])
-// //   .then((data) => {
-// //     const filename = `${data.name.toLowerCase().split(' ').join('')}.json`;
-
-// //     fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) =>
-// //       err ? console.log(err) : console.log('Success!')
-// //     );
-// //   });
-
-// // EXIT THE APPLICATION
-// function quit() {
-//     console.log('Goodbye, see you next time!');
-//     process.exit();
-// }
-
-// init();
-
-
-
-
-
-
-
-
-
-
-// // entry point for the application, importing the exported functions from server.js
-// const { prompt } = require('inquirer');
-// const logo = require('asciiart-logo');
-// const db = require('./develop/server.js'); // Adjust the path if necessary
-// const colors = require('colors'); // Assuming you use colors for styling
-// const { findAllEmployees } = require('./server');
-
-// // Display logo text, load main prompts
-// function init() {
-//   const logoText = logo({ name: 'Tracker Up Employee Manager' }).render();
-//   console.log(logoText);
-
-//   loadMainPrompts();
-// }
-
-// function loadMainPrompts() {
-//   prompt([
-//     {
-//       type: 'list',
-//       name: 'choice',
-//       message: colors.brightMagenta('What would you like to do?'),
-//       choices: [
-//         { name: 'View all employees', value: 'VIEW_EMPLOYEES' },
-//         { name: 'View all departments', value: 'VIEW_DEPARTMENTS' },
-//         { name: 'View all employees by departments', value: 'VIEW_EMPLOYEES_BY_DEPARTMENTS' },
-//         { name: 'View all roles', value: 'VIEW_ROLES' },
-//         { name: 'Add Department', value: 'ADD_DEPARTMENT' },
-//         { name: 'Add Role', value: 'ADD_ROLE' },
-//         { name: 'Add Employee', value: 'ADD_EMPLOYEE' },
-//         { name: 'Update an employee', value: 'UPDATE_AN_EMPLOYEE' },
-//         { name: 'Remove Employee', value: 'REMOVE_EMPLOYEE' },
-//         { name: 'Quit', value: 'QUIT' },
-//       ]
-//     }
-//   ]).then((res) => {
-//     let choice = res.choice;
-
-//     // Call the appropriate function depending on what the user chooses
-//     switch (choice) {
-//       case 'VIEW_EMPLOYEES':
-//         viewEmployees();
-//         break;
-//       case 'VIEW_DEPARTMENTS':
-//         viewDepartments();
-//         break;
-//       case 'VIEW_EMPLOYEES_BY_DEPARTMENTS':
-//         viewEmployeesByDepartments();
-//         break;
-//       case 'VIEW_ROLES':
-//         viewRoles();
-//         break;
-//       case 'ADD_DEPARTMENT':
-//         addDepartment();
-//         break;
-//       case 'ADD_ROLE':
-//         addRole();
-//         break;
-//       case 'ADD_EMPLOYEE':
-//         addEmployee();
-//         break;
-//       case 'UPDATE_AN_EMPLOYEE':
-//         updateAnEmployee();
-//         break;
-//       case 'REMOVE_EMPLOYEE':
-//         removeAnEmployee();
-//         break;
-//       case 'QUIT':
-//         console.log('Exiting the application. Goodbye!');
-//         // Optionally, you might want to add a process.exit(0); here to exit Node.js process
-//         break;
-//       default:
-//         console.log('Invalid choice');
-//         break;
-//     }
-//   }).catch((err) => {
-//     console.error('Error:', err);
-//   });
-// }
-
-
-// async function viewEmployees() {
-//   try {
-//     const employees = await db.findAllEmployees();
-//     console.log('\nAll Employees:');
-//     console.table(employees);
-//   } catch (err) {
-//     console.error('Error fetching employees:', err);
-//   }
-//   loadMainPrompts();
-// }
-
-// // Implement other functions (addDepartment, addRole, addEmployee, updateAnEmployee, removeAnEmployee) similarly
-
-// // Start the application
-// loadMainPrompts();
-
-// index.js
 
 const { prompt } = require('inquirer');
 const colors = require('colors');
-const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval } = require('./develop/server');
+const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval, updateEmployee } = require('./develop/server');
+const logo = require('asciiart-logo');
+const config = require('./package.json');
+console.log(logo(config).render());
+
+// display logo text, load main prompts
+function init() {
+    const logoText = logo({name: 'Tracker Up Employee Manager'}).render();
+
+    console.log(logoText);
+
+    loadMainPrompts();
+}
+
+
 
 // Function to load main prompts
 function loadMainPrompts() {
@@ -698,7 +337,6 @@ function viewEmployees() {
 
 // Function to prompt for updating an employee by first and last name
 function updateEmployeePrompt() {
-  // Prompt user to enter first and last name for update
   prompt([
     {
       type: 'input',
@@ -712,66 +350,49 @@ function updateEmployeePrompt() {
     },
     {
       type: 'input',
-      name: 'new_first_name',
-      message: 'Enter the new first name:',
+      name: 'title',
+      message: 'Enter the new title of their role:',
     },
     {
       type: 'input',
-      name: 'new_last_name',
-      message: 'Enter the new last name:',
-    },
-    {
-      type: 'input',
-      name: 'role_id',
-      message: 'Enter the new role ID:',
-    },
-    {
-      type: 'input',
-      name: 'manager_id',
-      message: 'Enter the new manager ID:',
+      name: 'manager_name',
+      message: 'Enter the new manager they will now fall under (if necessary):',
     },
   ])
     .then((answers) => {
-      const { first_name, last_name, new_first_name, new_last_name, role_id, manager_id } = answers;
+      const { first_name, last_name, title, manager_name } = answers;
 
       // Call updateEmployee function with first and last name and updates
-      updateEmployeePrompt({ first_name, last_name }, { new_first_name, new_last_name, role_id, manager_id })
-        .then((rowCount) => {
-          if (rowCount > 0) {
-            console.log(`${rowCount} employee updated.`);
-            // After updating, display updated employee list
-            viewEmployees();
-          } else {
-            console.log(`Employee with name ${first_name} ${last_name} not found.`);
-            loadMainPrompts(); // Return to main menu or handle as appropriate
-          }
-        })
-        .catch((err) => {
-          console.error('Error updating employee:', err);
-          loadMainPrompts();
-        });
+      return updateEmployee({ first_name, last_name }, { title, manager_name });
+    })
+    .then((rowCount) => {
+      if (rowCount > 0) {
+        console.log(`${rowCount} employee updated.`);
+        // After updating, display updated employee list
+        viewEmployees();
+      } else {
+        console.log(`Employee with name ${first_name} ${last_name} not found.`);
+        loadMainPrompts(); // Return to main menu or handle as appropriate
+      }
     })
     .catch((err) => {
-      console.error('Error:', err);
+      console.error('Error updating employee:', err);
       loadMainPrompts();
     });
 }
 
-module.exports = {
-  updateEmployeePrompt
-};
+// // Function to view all managers
+// function viewAllManagers() {
+//   findManagers().then(manager => {
+//     console.log('All Managers:');
+//     manager.forEach(manager => {
+//       console.log(`ID: ${manager.id} | Name: ${manager.name}`);
+//     });
+//   }).catch(err => {
+//     console.error('Error fetching managers:', err);
+//   });
+// }
 
-// Function to view all managers
-function viewAllManagers() {
-  findManagers().then(manager => {
-    console.log('All Managers:');
-    manager.forEach(manager => {
-      console.log(`ID: ${manager.id} | Name: ${manager.name}`);
-    });
-  }).catch(err => {
-    console.error('Error fetching managers:', err);
-  });
-}
-
+// 
 // Start the application
 loadMainPrompts();

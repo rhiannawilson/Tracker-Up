@@ -73,7 +73,7 @@ FROM role;
 SELECT * FROM manager;
 
 -- PostgreSQL example function to list managers
-CREATE OR REPLACE FUNCTION listManagers()
+CREATE OR REPLACE FUNCTION findAllManagers()
 RETURNS TABLE(manager_id INT, name VARCHAR(100), department_id INT) AS $$
 BEGIN
     RETURN QUERY
@@ -82,4 +82,22 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Example of calling listManagers function
-SELECT * FROM listManagers();
+SELECT * FROM findAllManagers();
+
+-- total sum of salaries all together
+SELECT SUM(salary) AS total_salary
+FROM role;
+
+-- update function
+  UPDATE employee 
+      SET title = $1, $2, manager_name = $2
+      WHERE id = $3;
+
+
+UPDATE employee 
+    SET role_id = $1, manager_id = (SELECT id FROM employee WHERE first_name = $2 AND last_name = $3)
+    WHERE id = $4;
+
+UPDATE role
+    SET title = $1, $2,
+    WHERE id = $2;

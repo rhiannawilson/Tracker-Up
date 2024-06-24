@@ -160,9 +160,6 @@ async function removeEmployee(employee_Id) {
   }
 }
 
-
-
-
 // Function to update an employee by first and last name
 async function updateEmployee({ first_name, last_name }, updates) {
   try {
@@ -173,52 +170,46 @@ async function updateEmployee({ first_name, last_name }, updates) {
     }
 
     // Query to check if employee exists
-    const employee = await findEmployeeByName(first_name, last_name);
+    const employee = await findAllEmployees(first_name, last_name);
     if (!employee) {
       console.log(`Employee with name ${first_name} ${last_name} not found.`);
       return 0;
     }
 
     // Destructure updates object
-    const { new_first_name, new_last_name, role_id, manager_id } = updates;
-    const updateSql = `
+    const { title, manager_name } = updates;
+
+    // Start transaction to update both employee and role tables
+    await pool.query('BEGIN');
+
+    // Update employee table
+    const updateEmployeeSql = `
       UPDATE employee 
-      SET first_name = $1, last_name = $2, role_id = $3, manager_id = $4
-      WHERE id = $5
+      SET role_id = (SELECT id FROM role WHERE title = $1), manager_id = (SELECT id FROM employee WHERE first_name = $2 AND last_name = $3)
+      WHERE id = $4
     `;
-    const updateValues = [new_first_name, new_last_name, role_id, manager_id, employee.id];
-    const updateResult = await pool.query(updateSql, updateValues);
+    const updateEmployeeValues = [title, manager_name, employee.id];
+    const updateEmployeeResult = await pool.query(updateEmployeeSql, updateEmployeeValues);
+
+    // Update role table (assuming title update is also needed)
+    const updateRoleSql = `
+      UPDATE role
+      SET title = $1
+      WHERE id = $2
+    `;
+    const updateRoleValues = [title, employee.role_id];
+    const updateRoleResult = await pool.query(updateRoleSql, updateRoleValues);
+
+    await pool.query('COMMIT'); // Commit transaction
 
     console.log(`Employee with name ${first_name} ${last_name} updated successfully.`);
-    return updateResult.rowCount;
+    return updateEmployeeResult.rowCount; // Return rowCount from employee table update
   } catch (err) {
+    await pool.query('ROLLBACK'); // Rollback transaction on error
     console.error('Error updating employee:', err);
     throw err;
   }
 }
-
-
-// Function to find an employee by first and last name
-async function findEmployeeByName(first_name, last_name) {
-  const sql = 'SELECT * FROM employee WHERE first_name = $1 AND last_name = $2';
-  const values = [first_name, last_name];
-
-  try {
-    const result = await pool.query(sql, values);
-    return result.rows[0]; // Return the first row (assuming first_name and last_name combination is unique) or null if not found
-  } catch (err) {
-    console.error('Error fetching employee:', err);
-    throw err; // Propagate the error back to the caller for handling
-  }
-}
-
-
-async function findAllManagers() {
-  const sql = 'SELECT * FROM manager';
-  const result = await pool.query(sql);
-  return result.rows;
-}
-
 
 
 // Export functions for use in other modules
@@ -229,9 +220,7 @@ module.exports = {
   findAllRoles,
   viewEmployeesForRemoval,
   removeEmployee,
-  findEmployeeByName,
   updateEmployee,
-  findAllManagers, 
   };
 
 // Start the Express server

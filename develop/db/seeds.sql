@@ -1,18 +1,18 @@
 
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
-INSERT INTO department (name)
-    VALUES  ('Web Development'),
-            ('Finance'),
-            ('Customer Services'),
-            ('Marketing'),
-            ('Operations'),
-            ('Administration');
+INSERT INTO department (name, department_id)
+    VALUES  ('Web Development', 1),
+            ('Finance', 2),
+            ('Customer Services', 3),
+            ('Marketing', 4),
+            ('Operations', 5),
+            ('Administration', 6);
 
 INSERT INTO manager (name, department_id)
   VALUES  ('Ryan Able', 1), -- Web Development
           ('Rebecca Southerland', 2), -- Finance
-          ('Joy Kelly', 3), -- Customer Services
+          ('Joy Kelly', 3), -- Customer Services\
           ('Daniel Vicks', 4), -- Marketing
           ('Shaun Schole', 5), -- Operations
           ('Nicholas Black', 6); -- Administration
