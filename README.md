@@ -2,23 +2,24 @@
 Employee Tracker System 
 
 # Description
-Employee Tracker System built via a command-line application from scratch, to manage a company's employee database, using Node.js, Inquirer, and PostgreSQL.
+Employee Tracker System is built via a command-line application from scratch, to manage a company's employee database, using Node.js, Inquirer, and PostgreSQL.
 
-## Walkthrough_Video_File
+## Walkthrough Video
 This assignment is not deployed and was submitted as requested via video demonstration, see below:
 - [Video Demo](https://drive.google.com/file/d/15rvslFZB9807FZFkwcwFUZ_WnMEYsVv5/view?usp=sharing)
 
 ## Tracker Up - README.MD
 ### Table of Contents:
-- [Description](#Description)
-- [Video Demo](#Walkthrough_Video_File)
-- [Usage & Technical Details](#Usage)
-- [Usage Instructions](#Usage_Instructions)
-- [Testing](#Testing)
-- [SVG Resources Used](#SVG_Resources_Used)
-- [Credits](#Credits)
-- [License](#License)
-- [Author](#Author)
+- [Description](#description)
+- [Video Demo](#walkthrough-video)
+- [Directory Structure](#directory-structure)
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Usage & Technical Details](#usage--instructions)
+- [Contributions](#contributions)
+- [Credits](#credits)
+- [License](#license)
+- [Author](#author)
 
 ## Directory Structure
 ```  
@@ -35,6 +36,7 @@ This assignment is not deployed and was submitted as requested via video demonst
 ├── package.json
 └── README.md         
 ```
+[Back to Table of Contents](#table-of-contents)
 
 ## User Story
 ```md
@@ -42,6 +44,7 @@ AS A business owner
 I WANT to be able to view and manage the departments, roles, and employees in my company
 SO THAT I can organize and plan my business
 ```
+[Back to Table of Contents](#table-of-contents)
 
 ## Acceptance Criteria
 ```md
@@ -63,6 +66,7 @@ THEN I am prompted to enter the employee’s first name, last name, role, and ma
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 ```
+[Back to Table of Contents](#table-of-contents)
 
 ## Appearance & Functionality 
 The following images display the web application's appearance and functionality:
@@ -77,6 +81,7 @@ The following images display the web application's appearance and functionality:
 #### Weather Forecast Display
 ![Forecast Display Image](./assets/images/WD-Weather%20Forecast%20Search%20Function%20and%20History%20List.png)
 
+[Back to Table of Contents](#table-of-contents)
 
 ## Usage & Instructions
     1. Clone a copy of this repo to your local machine
@@ -90,8 +95,6 @@ The following images display the web application's appearance and functionality:
     \c sample_db; to change to that database \c postgres to change back to postgres  
     \q to quit and exit the postgres or any databas eyou're in 
 
-  
-
 ### Technical Details
     > Node Package Manager
     > Express - Node JS Framework
@@ -101,26 +104,20 @@ The following images display the web application's appearance and functionality:
     > SQL
 
 ### .gitignore 
-    > dist
     > .DS_store
     > node_modules
-
-### Website Features & Technical Details
-    - HTML
-    - CSS
-    - JavaScript
-    - OpenWeather API https://openweathermap.org to retrieve weather data
-    - `localStorage` to store persistent data.
+    
+[Back to Table of Contents](#table-of-contents)
 
 ## Contributions
-#### Resources
-* [Example SVG](https://static.fullstack-bootcamp.com/fullstack-ground/module-10/circle.svg)
 
 ## Credits
 N/A
+[Back to Table of Contents](#table-of-contents)
 
 ## License
 ![alt text](https://img.shields.io/badge/License-_MIT-blue.svg)
 
 ## Author
 @ Rhianna Wilson
+[Back to Table of Contents](#table-of-contents)

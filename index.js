@@ -1,5 +1,3 @@
-
-
 const { prompt } = require('inquirer');
 const colors = require('colors');
 const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval, updateEmployee } = require('./develop/server');
@@ -14,9 +12,7 @@ function init() {
     console.log(logoText);
 
     loadMainPrompts();
-}
-
-
+};
 
 // Function to load main prompts
 function loadMainPrompts() {
@@ -42,7 +38,7 @@ function loadMainPrompts() {
     let choice = res.choice;
 
     switch (choice) {
-      case 'VIEW_EMPLOYEES':
+      case "VIEW_EMPLOYEES":
         viewEmployees();
         break;
       case 'VIEW_DEPARTMENTS':
@@ -64,7 +60,8 @@ function loadMainPrompts() {
         removeEmployeePrompt();
         break;
       case 'UPDATE_EMPLOYEE':
-        updateEmployeePrompt();
+        updateEmployeePrompt(),
+        updateEmployee();
         break;
       case 'VIEW_MANAGERS':
         viewAllManagers();
@@ -79,8 +76,7 @@ function loadMainPrompts() {
   }).catch((err) => {
     console.error('Error:', err);
   });
-}
-
+};
 
 // Function to view all employees
 function viewEmployees() {
@@ -97,7 +93,7 @@ function viewEmployees() {
       console.error('Error fetching employees:', err);
       loadMainPrompts();
     });
-}
+};
 
 // Function to view all departments
 function viewDepartments() {
@@ -111,53 +107,52 @@ function viewDepartments() {
       console.error('Error fetching departments:', err);
       loadMainPrompts();
     });
-}
+};
 
 // Function to view all roles
 function viewRoles() {
-  findAllRoles()
-    .then((role) => {
-      console.log('\nAll Roles:');
-      console.table(role);
-      loadMainPrompts();
-    })
-    .catch((err) => {
-      console.error('Error fetching departments:', err);
-      loadMainPrompts();
-    });
-}
+   findAllRoles()
+     .then((role) => {
+       console.log('\nAll Roles:');
+       console.table(role);
+       loadMainPrompts();
+     })
+     .catch((err) => {
+       console.error('Error fetching departments:', err);
+       loadMainPrompts();
+     });
+};
 
 // Function to add a department
 function addDepartment() {
-  prompt([
-    {
-      type: 'input',
-      name: 'name',
-      message: 'Enter the name of the department:'
-    }
-  ]).then((answers) => {
-    const { name } = answers;
-
-    // Query to insert department into database
+prompt([
+  {
+    type: 'input',
+    name: 'name',
+    message: 'Enter the name of the department:'
+  }
+]).then((answers) => {
+  const { name } = answers;    
+  
+// Query to insert department into database
     const sql = 'INSERT INTO department (name) VALUES ($1)';
     const values = [name];
 
-    pool.query(sql, values)
-      .then(() => {
-        console.log(`\nDepartment '${name}' added successfully!\n`);
-        // After adding, display all departments including the new one
-        viewDepartments();
-      })
-      .catch((err) => {
-        console.error('Error adding department:', err);
-        loadMainPrompts();
-      });
-  }).catch((err) => {
-    console.error('Error:', err);
-    loadMainPrompts();
-  });
-}
-
+     pool.query(sql, values)
+       .then(() => {
+         console.log(`\nDepartment '${name}' added successfully!\n`);
+         // After adding, display all departments including the new one
+         viewDepartments();
+       })
+       .catch((err) => {
+         console.error('Error adding department:', err);
+         loadMainPrompts();
+       });
+   }).catch((err) => {
+     console.error('Error:', err);
+     loadMainPrompts();
+   });
+};
 
 // Function to add a role
 function addRole() {
@@ -200,7 +195,7 @@ function addRole() {
     console.error('Error:', err);
     loadMainPrompts(); // Or handle errors as appropriate
   });
-}
+};
 
 // Function to add an employee
 function addEmployee() {
@@ -218,7 +213,7 @@ function addEmployee() {
     },
     {
       type: 'input',
-      name: 'role_id',
+      name: 'role.title',
       message: 'Enter the role ID for the employee (optional):'
     },
     {
@@ -252,7 +247,7 @@ function addEmployee() {
     console.error('Error:', err);
     loadMainPrompts(); // Or handle errors as appropriate
   });
-}
+};
 
 // Function to view all employees
 function viewEmployees() {
@@ -311,7 +306,7 @@ function removeEmployeePrompt() {
       console.error('Error fetching employees:', err);
       loadMainPrompts();
     });
-}
+};
 
 module.exports = {
   removeEmployeePrompt
@@ -333,7 +328,6 @@ function viewEmployees() {
       loadMainPrompts();
     });
 }
-
 
 // Function to prompt for updating an employee by first and last name
 function updateEmployeePrompt() {
@@ -359,13 +353,11 @@ function updateEmployeePrompt() {
       message: 'Enter the new manager they will now fall under (if necessary):',
     },
   ])
-    .then((answers) => {
-      const { first_name, last_name, title, manager_name } = answers;
+    .then(async (answers) => {
+      const {first_name, last_name, title, manager_name } = answers;
 
       // Call updateEmployee function with first and last name and updates
-      return updateEmployee({ first_name, last_name }, { title, manager_name });
-    })
-    .then((rowCount) => {
+      const rowCount = await updateEmployee({ first_name, last_name }, { title, manager_name });
       if (rowCount > 0) {
         console.log(`${rowCount} employee updated.`);
         // After updating, display updated employee list
@@ -374,25 +366,25 @@ function updateEmployeePrompt() {
         console.log(`Employee with name ${first_name} ${last_name} not found.`);
         loadMainPrompts(); // Return to main menu or handle as appropriate
       }
-    })
+  })
     .catch((err) => {
       console.error('Error updating employee:', err);
       loadMainPrompts();
     });
-}
+};
 
-// // Function to view all managers
-// function viewAllManagers() {
-//   findManagers().then(manager => {
-//     console.log('All Managers:');
-//     manager.forEach(manager => {
-//       console.log(`ID: ${manager.id} | Name: ${manager.name}`);
-//     });
-//   }).catch(err => {
-//     console.error('Error fetching managers:', err);
-//   });
-// }
+// Function to view all managers
+function viewAllManagers() {
+  findManagers().then(manager => {
+    console.log('All Managers:');
+    manager.forEach(manager => {
+      console.log(`ID: ${manager.id} | Name: ${manager.name}`);
+    });
+  }).catch(err => {
+    console.error('Error fetching managers:', err);
+  });
+};
 
-// 
+
 // Start the application
 loadMainPrompts();

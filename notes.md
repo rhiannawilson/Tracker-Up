@@ -1,4 +1,5 @@
-TO DO
+_Rhianna's Notes_
+_TO DO_
 
 // 1. Set up a REPO in github & create unique name 
 // 1a. clone to local machine
@@ -20,8 +21,6 @@ You’ll need to use the pg package to connect to your PostgreSQL database and p
 and that's through a .SQL file (aka schema.sql)
 
 
-
-
 4. create tables of data 
 
 OPTIONS given
@@ -29,11 +28,10 @@ view all departments //
 view all roles //
 view all employees //
 view employees by departments //
-add a department - to finish
-add a role
-add an employee - to finish
-and update an employee role - to finish
-
+add a department //
+add a role//
+add an employee//
+and update an employee role //
 
 
 _TABLE SECTION - DONE_
@@ -63,14 +61,15 @@ salaries,
 and managers 
 _INSERT SECTION - DONE_
 
-
-
+_DONE_
 WHEN add a department
 THEN I am prompted to enter the name of the department and that department is added to the database
 
+_DONE_
 WHEN I choose to add a role
 THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 
+_DONE_
 WHEN I choose to add an employee
 THEN I am prompted to enter the 
 employee’s first name, 
@@ -78,13 +77,7 @@ last name,
 role, and manager, 
 and that employee is added to the database
 
+_Partially done, needs reviewing at a later stage_
 WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role 
 this information is updated in the database
-
-
-        "express": "^4.19.2",
-        "inquirer": "^8.2.4",
-        "node": "^20.15.0",
-        "pg": "^8.12.0",
-        "prompt-sync": "^4.2.0"
