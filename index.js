@@ -1,3 +1,4 @@
+
 const { prompt } = require('inquirer');
 const colors = require('colors');
 const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval, updateEmployee } = require('./develop/server');

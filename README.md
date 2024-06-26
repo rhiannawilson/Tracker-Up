@@ -15,6 +15,7 @@ This assignment is not deployed and was submitted as requested via video demonst
 - [Directory Structure](#directory-structure)
 - [User Story](#user-story)
 - [Acceptance Criteria](#acceptance-criteria)
+- [Appearance & Functionality](#appearance--functionality) 
 - [Usage & Technical Details](#usage--instructions)
 - [Contributions](#contributions)
 - [Credits](#credits)
@@ -23,18 +24,25 @@ This assignment is not deployed and was submitted as requested via video demonst
 
 ## Directory Structure
 ```  
-├── Assets/ 
-├── lib/                
-    ├── shapes.js       
-    ├── shapes.test.js  
-├── node_modules           
-├── .gitignore          
-├── index.js    
-├── LICENSE
-├── logo.svg  
-├── package-lock.json
-├── package.json
-└── README.md         
+├── TRACKER-UP
+    ├── assets/
+        ├──Example of View All departments.png
+        ├──assets/Example of View All Roles.png
+        ├──assets/Example View All Employees.png
+        ├──assets/Main Run - Nod index.js.png
+    ├── develop/                
+        ├── db/
+            ├── queries.sql
+            ├── schema.sql
+            ├── seeds.sql              
+        ├── server.js  
+    ├── node_modules/           
+    ├── .gitignore          
+    ├── index.js    
+    ├── LICENSE
+    ├── package-lock.json
+    ├── package.json
+    └── README.md         
 ```
 [Back to Table of Contents](#table-of-contents)
 
@@ -69,17 +77,17 @@ THEN I am prompted to select an employee to update and their new role and this i
 [Back to Table of Contents](#table-of-contents)
 
 ## Appearance & Functionality 
-The following images display the web application's appearance and functionality:
+#### Node Index.js - First CLI Display
+![Main Run of Application](./assets/Main%20Run%20of%20Node%20index.js.png)
 
-### Images
-![index.js vscode preview](./Assets/index.js%20preview.png)
-![SVG Green Circle Logo](./Assets/challenge%20logo.png)
+#### View All Departments Example
+![View All Departments Example](./assets/Example%20of%20View%20All%20Departments.png)
 
-#### Main Site Page
-![Main Website Image](./assets/images/WD-Main%20Site%20Page.png)
+#### View All Roles Example
+![View All Roles Example](./assets/Example%20of%20View%20All%20Roles.png)
 
-#### Weather Forecast Display
-![Forecast Display Image](./assets/images/WD-Weather%20Forecast%20Search%20Function%20and%20History%20List.png)
+#### View All Employees Example
+![View All Employees Example](./assets/Example%20View%20All%20Employees.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -87,32 +95,37 @@ The following images display the web application's appearance and functionality:
     1. Clone a copy of this repo to your local machine
     2. Install the packages below to practice connecting to your server and databases
     3. Open the integrated terminal in your code editor
-    4. Make sure you're in the correct path, copy the 'parent folder' that your .sql files live in
-    4. Connect to your POSTGRES SERVER by entering the command 'psql -U postgres' and password you created when initially installed the Postgres 'local' server
-    5. Run the command \list to see what databases you have already
-    6. Practice executing the statments listed inside the schema.sql file, an automated process, by executing the command \i schema.sql
-    7. \list to view the NEWLY created database 'sample_db;'
-    \c sample_db; to change to that database \c postgres to change back to postgres  
-    \q to quit and exit the postgres or any databas eyou're in 
+    4. Make sure you're in the correct path, copy the parent folder that your .sql files live in
+    5. Connect to your POSTGRES SERVER by entering the command **psql -U postgres** and the password you created when initially installing the Postgres local server
+    6. Run the command **\list** to see what databases you have already
+    7. Execute the statments listed inside the schema.sql file, using the command **\i schema.sql**
+    8. You'll need to seed your data, use the command \i seeds.sql
+    9. Command **\list** to view the NEWLY created database 'nameofdatabas_db;'
+    10. Command **\c nameofdatabas_db;** to change to your database and **\c postgres** to change back to postgres
+    11. To run the application, exit the database use command **\q** to quit and exit postgres.
+    12. Navigate to the same file path as index.js and run command **node index.js** to run the application
 
 ### Technical Details
-    > Node Package Manager
-    > Express - Node JS Framework
-    > Inquirer@8.2.4 - NPM package
-    > PG Package - a non-blocking PostgreSQL client for Node.js
-    > Postgres
-    > SQL
+- > Node Package Manager - 'npm i node'
+- > Express, Node JS Framework - 'npm install express'
+- > Inquirer@8.2.4, NPM package - 'npm install Inquirer@8.2.4'
+- > PG Package, a non-blocking PostgreSQL client for Node - 'npm install pg'
+- > Postgres
+- > SQL
 
 ### .gitignore 
-    > .DS_store
-    > node_modules
+- > .DS_store 
+- > node_modules
     
 [Back to Table of Contents](#table-of-contents)
-
 ## Contributions
+N/A
+
+[Back to Table of Contents](#table-of-contents)
 
 ## Credits
 N/A
+
 [Back to Table of Contents](#table-of-contents)
 
 ## License

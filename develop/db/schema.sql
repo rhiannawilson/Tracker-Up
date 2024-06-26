@@ -43,24 +43,14 @@ CREATE TABLE manager (
     FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
--- remember the order 'column name', 'data type', 'constraint'
 
--- DATA TYPES
--- CREATE TABLE courses ß(
---    id INTEGER NOT NULL,
---    course_title VARCHAR(30) NOT NULL, 
---    course_description TEXT NOT NULL, 
---    active BOOLEAN NOT NULL, 
- --   date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
---);
+-- creates the table employees and their roles 
+CREATE TABLE employeeRole (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    role_id INTEGER,
+    manager_id INTEGER,
+    department_id INTEGER,
+    FOREIGN KEY (employeeRole_id) REFERENCES role(id));
 
--- serial = unique integer that has auto incrementation built into it
--- primary key = a constraint to ensure no duplication of IDs
-
-
---    FOREIGN KEY (employee_id)
---    REFERENCES employees(id)
---    ON DELETE SET NULL
-
--- relational databases
--- employees
