@@ -127,9 +127,9 @@ async function removeEmployee(employee_Id) {
 // };
 
 let employees = [
-  { first_name: 'John', last_name: 'Doe', title: 'Software Engineer', manager_name: 'Jane Smith' },
-  { first_name: 'Jane', last_name: 'Smith', title: 'Manager', manager_name: 'John Doe' },
-  { first_name: 'Alice', last_name: 'Johnson', title: 'Developer', manager_name: 'Jane Smith' }
+  { first_name: 'Rhianna', last_name: 'Doe', title: 'Full Stack Engineer', manager_name: 'Ryan Able' },
+  { first_name: 'Jessica', last_name: 'Walker', title: 'Accountant', manager_name: 'Rebecca Southerland' },
+  { first_name: 'Peter', last_name: 'Matthews', title: 'Customer Services Agent', manager_name: 'Joy Kelly' }
 ];
 
 // Function to update employee information
@@ -151,13 +151,11 @@ function updateEmployee(first_name, last_name, updates) {
 }
 
 // Example usage:
-updateEmployee('John', 'Doe', { title: 'Senior Software Engineer' });
+updateEmployee('Rhianna', 'Wilson', { title: 'Full Stack Engineer' });
 console.log(employees);
-
-updateEmployee('Alice', 'Johnson', { title: 'Senior Developer', manager_name: 'John Doe' });
+updateEmployee('Jessica', 'Walker', { title: 'Accountant', manager_name: 'John Doe' });
 console.log(employees);
-
-updateEmployee('Mary', 'Smith', { title: 'Manager' }); // Non-existing employee
+updateEmployee('Peter', 'Matthews', { title: 'Customer Services Agent' }); // Non-existing employee
 
 
 // Export functions for use in other modules

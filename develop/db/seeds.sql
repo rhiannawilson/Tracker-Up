@@ -1,38 +1,39 @@
 
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
-INSERT INTO department (name, department_id)
-    VALUES  ('Web Development', 007),
-            ('Finance', 009),
-            ('Customer Services', 008),
-            ('Marketing', 006),
-            ('Operations', 011),
-            ('Administration', 016);
+INSERT INTO departments (name)
+VALUES  ('Web Development'), 
+        ('Finance'), 
+        ('Customer Services'), 
+        ('Marketing'), 
+        ('Operations'), 
+        ('Administration');
 
-INSERT INTO manager (name, department_id)
-  VALUES  ('Ryan Able', 007), -- Web Development
-          ('Rebecca Southerland', 009), -- Finance
-          ('Joy Kelly', 008), -- Customer Services\
-          ('Daniel Vicks', 006), -- Marketing
-          ('Shaun Schole', 011), -- Operations
-          ('Nicholas Black', 016); -- Administration
+INSERT INTO managers (manager_name, department_id)
+VALUES ('Ryan Able', 1),  -- Web Development
+       ('Rebecca Southerland', 2),  -- Finance
+       ('Joy Kelly', 3),  -- Customer Services
+       ('Daniel Vicks', 4),  -- Marketing
+       ('Shaun Schole', 5),  -- Operations
+       ('Nicholas Black', 6);  -- Administration
+
 
 
 -- -- inserts data into my roles table 
-INSERT INTO role (title, salary, department_id) 
-  VALUES  ('Customer Services Agent', '80000', 008),
-          ('Accountant', '110000', 009),
-          ('Full Stack Engineer', '180000', 007),
-          ('Marketing Coordinator', '100000', 006),
-          ('Receptionist', '75000', 016),
-          ('Marketing Manager', '150000', 006),
-          ('Front-End Engineer', '180000', 015),
-          ('Admin Assistant', '70000', 011),
-          ('Runner', '60000', 016);
+INSERT INTO roles (title, salary, department_id)
+VALUES ('Customer Services Agent', 80000, 3),  -- Customer Services
+       ('Accountant', 110000, 2),  -- Finance
+       ('Full Stack Engineer', 180000, 1),  -- Web Development
+       ('Marketing Coordinator', 100000, 4),  -- Marketing
+       ('Receptionist', 75000, 6),  -- Administration
+       ('Marketing Manager', 150000, 4),  -- Marketing
+       ('Front-End Engineer', 180000, 5),  -- Operations
+       ('Admin Assistant', 70000, 6),  -- Administration
+       ('Runner', 60000, 6);  -- Administration
             
 
 -- inserts data into my employees table 
-INSERT INTO employee (first_name, last_name)
+INSERT INTO employees (first_name, last_name)
     VALUES  ('Rhianna', 'Wilson'),
             ('Jessica', 'Walker'),
             ('Peter', 'Matthews'),
@@ -47,17 +48,17 @@ INSERT INTO employee (first_name, last_name)
             ('Jeffery', 'Smithers'),
             ('Emily', 'Keenes');
 
-INSERT INTO employeeRole (first_name, last_name, role.id, manager.id, department_id)
-    VALUES  ('Rhianna', 'Wilson', 011),
-            ('Jessica', 'Walker', 009),
-            ('Peter', 'Matthews', 009),
-            ('Jack', 'Williams', 011),
-            ('George', 'Peters', 016),
-            ('Jane', 'Doe', 016), 
-            ('Sarah', 'Southland', 011),
-            ('Matt', 'Jeffery', 008),
-            ('Manuela', 'Tiang', 008),
-            ('Dan', 'Ryi', 008),
-            ('Kate', 'Maoun', 008),
-            ('Jeffery', 'Smithers', 007),
-            ('Emily', 'Keenes', 007);
+INSERT INTO employeeRole (first_name, last_name, manager_id, role_id)
+VALUES ('Rhianna', 'Wilson', 1, 3),  -- Ryan Able, Full Stack Engineer
+       ('Jessica', 'Walker', 2, 2),  -- Rebecca Southerland, Accountant
+       ('Peter', 'Matthews', 3, 1),  -- Joy Kelly, Customer Services Agent
+       ('Jack', 'Williams', 5, 7),  -- Shaun Schole, Front-End Engineer
+       ('George', 'Peters', 6, 9),  -- Nicholas Black, Runner
+       ('Jane', 'Doe', 2, 2),  -- Rebecca Southerland, Accountant
+       ('Sarah', 'Southland', 5, 7),  -- Shaun Schole, Front-End Engineer
+       ('Matt', 'Jeffery', 3, 1),  -- Joy Kelly, Customer Services Agent
+       ('Manuela', 'Tiang', 4, 4),  -- Daniel Vicks, Marketing Coordinator
+       ('Dan', 'Ryi', 3, 1),  -- Joy Kelly, Customer Services Agent
+       ('Kate', 'Maoun', 2, 2),  -- Rebecca Southerland, Accountant
+       ('Jeffery', 'Smithers', 1, 3),  -- Ryan Able, Full Stack Engineer
+       ('Emily', 'Keenes', 1, 3);  -- Ryan Able, Full Stack Engineer
