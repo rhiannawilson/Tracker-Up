@@ -1,9 +1,3 @@
--- View all roles with their corresponding departments
-DO $$
-
-DECLARE
-
-BEGIN
 
 SELECT 
     role.id AS role_id,
@@ -108,16 +102,13 @@ UPDATE role
     SET title = $1, $2,
     WHERE id = $2;
 
+UPDATE employee SET first_name = $1, last_name = $2, role_id = $3, manager_id = $4, department_id =$5 WHERE id = $6;
 
-UPDATE employee SET role_id = 1, manager_id = 3 WHERE id = 2; 
-UPDATE employee SET role_id = 2, manager_id = 1 WHERE id = 1; 
-UPDATE employee SET role_id = 3, manager_id = 2 WHERE id = 3; 
+UPDATE employees
+SET column1 = ?, column2 = ?
+WHERE id = ?
+
+SELECT * FROM manager;
 
 
-RAISE NOTICE 'You visit is complete';
-
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE NOTICE 'An error occurred: %', SQLERRM;
-
-END $$;
+END;

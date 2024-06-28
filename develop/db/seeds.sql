@@ -1,26 +1,26 @@
 
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
-INSERT INTO departments (name)
-VALUES  ('Web Development'), 
-        ('Finance'), 
-        ('Customer Services'), 
-        ('Marketing'), 
-        ('Operations'), 
-        ('Administration');
+INSERT INTO department (name, id)
+VALUES  ('Web Development', 1), 
+        ('Finance', 2), 
+        ('Customer Services', 3), 
+        ('Marketing', 4), 
+        ('Operations', 5), 
+        ('Administration', 6);
 
-INSERT INTO managers (manager_name, department_id)
-VALUES ('Ryan Able', 1),  -- Web Development
-       ('Rebecca Southerland', 2),  -- Finance
-       ('Joy Kelly', 3),  -- Customer Services
-       ('Daniel Vicks', 4),  -- Marketing
-       ('Shaun Schole', 5),  -- Operations
-       ('Nicholas Black', 6);  -- Administration
+INSERT INTO manager (id, name, department_id)
+VALUES ('87', 'Ryan Able', 1),  -- Web Development
+       ('88', 'Rebecca Southerland', 2),  -- Finance
+       ('89', 'Joy Kelly', 3),  -- Customer Services
+       ('90', 'Daniel Vicks', 4),  -- Marketing
+       ('91', 'Shaun Schole', 5),  -- Operations
+       ('92', 'Nicholas Black', 6);  -- Administration
 
 
 
 -- -- inserts data into my roles table 
-INSERT INTO roles (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES ('Customer Services Agent', 80000, 3),  -- Customer Services
        ('Accountant', 110000, 2),  -- Finance
        ('Full Stack Engineer', 180000, 1),  -- Web Development
@@ -33,7 +33,7 @@ VALUES ('Customer Services Agent', 80000, 3),  -- Customer Services
             
 
 -- inserts data into my employees table 
-INSERT INTO employees (first_name, last_name)
+INSERT INTO employee (first_name, last_name)
     VALUES  ('Rhianna', 'Wilson'),
             ('Jessica', 'Walker'),
             ('Peter', 'Matthews'),

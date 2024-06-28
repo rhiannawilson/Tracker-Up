@@ -1,7 +1,6 @@
-
-const { prompt } = require('inquirer');
 const colors = require('colors');
-const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval, updateEmployee } = require('./develop/server');
+const { prompt } = require('inquirer');
+const { pool, findAllEmployees, findAllDepartments, findAllRoles, removeEmployee, viewEmployeesForRemoval, findAllManagers, updateEmployee } = require('./develop/server');
 const logo = require('asciiart-logo');
 const config = require('./package.json');
 console.log(logo(config).render());
@@ -26,7 +25,7 @@ function loadMainPrompts() {
         { name: 'View all employees', value: 'VIEW_EMPLOYEES' },
         { name: 'View all departments', value: 'VIEW_DEPARTMENTS' },
         { name: 'View all roles', value: 'VIEW_ROLES' },
-        { name: 'View all managers', value: 'VIEW_MANAGERS' },
+        { name: 'View all managers', value: 'VIEW_MANAGERS'},
         { name: 'Add Department', value: 'ADD_DEPARTMENT' },
         { name: 'Add Role', value: 'ADD_ROLE' },
         { name: 'Add Employee', value: 'ADD_EMPLOYEE' },
@@ -61,7 +60,6 @@ function loadMainPrompts() {
         removeEmployeePrompt();
         break;
       case 'UPDATE_EMPLOYEE':
-        updateEmployeePrompt(),
         updateEmployee();
         break;
       case 'VIEW_MANAGERS':
@@ -215,12 +213,12 @@ function addEmployee() {
     {
       type: 'input',
       name: 'role.title',
-      message: 'Enter the role ID for the employee (optional):'
+      message: 'Enter to assign a new role ID for the employee:'
     },
     {
       type: 'input',
       name: 'manager_id',
-      message: 'Enter the manager ID for the employee (optional):'
+      message: 'Enter to assign a new manager ID for the employee:'
     }
   ]).then((answers) => {
     const { first_name, last_name, role_id, manager_id } = answers;
@@ -270,7 +268,7 @@ function viewEmployees() {
 // Function to prompt for employee removal
 function removeEmployeePrompt() {
   findAllEmployees()
-    .then((employees) => {
+    .then((employee) => {
       prompt([
         {
           type: 'input',
@@ -281,7 +279,7 @@ function removeEmployeePrompt() {
         const { employee_Id } = answers;
 
         // Validate employeeId input against available employees
-        const employeeToRemove = employees.find(emp => emp.id === parseInt(employee_Id));
+        const employeeToRemove = employee.find(emp => emp.id === parseInt(employee_Id));
         if (!employeeToRemove) {
           console.log(`Employee with ID ${employee_Id} not found.`);
           loadMainPrompts();
@@ -330,62 +328,19 @@ function viewEmployees() {
     });
 }
 
-// Function to prompt for updating an employee by first and last name
-function updateEmployeePrompt() {
-  prompt([
-    {
-      type: 'input',
-      name: 'first_name',
-      message: 'Enter the first name of the employee to update:',
-    },
-    {
-      type: 'input',
-      name: 'last_name',
-      message: 'Enter the last name of the employee to update:',
-    },
-    {
-      type: 'input',
-      name: 'title',
-      message: 'Enter the new title of their role:',
-    },
-    {
-      type: 'input',
-      name: 'manager_name',
-      message: 'Enter the new manager they will now fall under (if necessary):',
-    },
-  ])
-    .then(async (answers) => {
-      const {first_name, last_name, title, manager_name } = answers;
-
-      // Call updateEmployee function with first and last name and updates
-      const rowCount = await updateEmployee({ first_name, last_name }, { title, manager_name });
-      if (rowCount > 0) {
-        console.log(`${rowCount} employee updated.`);
-        // After updating, display updated employee list
-        viewEmployees();
-      } else {
-        console.log(`Employee with name ${first_name} ${last_name} not found.`);
-        loadMainPrompts(); // Return to main menu or handle as appropriate
-      }
-  })
-    .catch((err) => {
-      console.error('Error updating employee:', err);
-      loadMainPrompts();
-    });
-};
-
-// Function to view all managers
 function viewAllManagers() {
-  findManagers().then(manager => {
-    console.log('All Managers:');
-    manager.forEach(manager => {
-      console.log(`ID: ${manager.id} | Name: ${manager.name}`);
+  findAllManagers()
+    .then((manager) => {
+      console.log('\nAll Managers:');
+      manager.forEach(manager => {
+        console.log(`ID: ${manager.id} | Name: ${manager.name} | Department ID: ${manager.department_id}`);
+      });
+      loadMainPrompts();
+    })
+    .catch((error) => {
+      console.error("Error fetching managers:", error);
     });
-  }).catch(err => {
-    console.error('Error fetching managers:', err);
-  });
 };
-
 
 // Start the application
 loadMainPrompts();

@@ -1,21 +1,23 @@
 {
+  "name": "tracker-up",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "asciiart-logo": "^0.2.7",
     "colors": "^1.4.0",
     "express": "^4.19.2",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.6",
     "node": "^20.15.0",
     "pg": "^8.12.0",
-    "prompt-sync": "^4.2.0"
-  },
-  "name": "tracker-up",
-  "version": "1.0.0",
-  "description": "Employee Database Management System",
-  "main": "node index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "author": "Rhianna Wilson",
-  "license": "MIT"
+    "pool": "^0.4.1",
+    "require": "^2.4.20",
+    "update": "^0.7.4"
+  }
 }
