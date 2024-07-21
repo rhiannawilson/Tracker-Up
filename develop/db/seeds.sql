@@ -1,7 +1,7 @@
 
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
-INSERT INTO department (name, id)
+INSERT INTO department (department_name, id)
 VALUES  ('Web Development', 1), 
         ('Finance', 2), 
         ('Customer Services', 3), 
@@ -33,20 +33,20 @@ VALUES ('Customer Services Agent', 80000, 3),  -- Customer Services
             
 
 -- inserts data into my employees table 
-INSERT INTO employee (first_name, last_name)
-    VALUES  ('Rhianna', 'Wilson'),
-            ('Jessica', 'Walker'),
-            ('Peter', 'Matthews'),
-            ('Jack', 'Williams'),
-            ('George', 'Peters'),
-            ('Jane', 'Doe'),
-            ('Sarah', 'Southland'),
-            ('Matt', 'Jeffery'),
-            ('Manuela', 'Tiang'), 
-            ('Dan', 'Ryi'),
-            ('Kate', 'Maoun'),
-            ('Jeffery', 'Smithers'),
-            ('Emily', 'Keenes');
+INSERT INTO employee (first_name, last_name, id)
+    VALUES  ('Rhianna', 'Wilson', 1),
+            ('Jessica', 'Walker', 2),
+            ('Peter', 'Matthews', 3),
+            ('Jack', 'Williams', 4),
+            ('George', 'Peters', 5),
+            ('Jane', 'Doe', 6),
+            ('Sarah', 'Southland', 7),
+            ('Matt', 'Jeffery', 8),
+            ('Manuela', 'Tiang', 9), 
+            ('Dan', 'Ryi', 10),
+            ('Kate', 'Maoun', 11),
+            ('Jeffery', 'Smithers', 12),
+            ('Emily', 'Keenes', 13);
 
 INSERT INTO employeeRole (first_name, last_name, manager_id, role_id)
 VALUES ('Rhianna', 'Wilson', 1, 3),  -- Ryan Able, Full Stack Engineer

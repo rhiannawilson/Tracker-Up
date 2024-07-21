@@ -1,5 +1,4 @@
 _Rhianna's Notes_
-_TO DO_
 
 // 1. Set up a REPO in github & create unique name 
 // 1a. clone to local machine
@@ -20,9 +19,7 @@ You’ll need to use the pg package to connect to your PostgreSQL database and p
 3c. you can technically now input SELECT * FROM database_name.db, however there is aother way
 and that's through a .SQL file (aka schema.sql)
 
-
 4. create tables of data 
-
 OPTIONS given
 view all departments //
 view all roles //

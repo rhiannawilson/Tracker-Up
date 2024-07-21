@@ -9,8 +9,9 @@ CREATE DATABASE employeeinventory_db;
 -- creates the table departments within employeeInventory_db
 CREATE TABLE department (
     id SERIAL PRIMARY KEY, 
-    name VARCHAR (30) NOT NULL
+    department_name VARCHAR (30) NOT NULL
 );
+
 CREATE TABLE manager (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
