@@ -12,12 +12,11 @@
   "dependencies": {
     "asciiart-logo": "^0.2.7",
     "colors": "^1.4.0",
-    "express": "^4.19.2",
     "inquirer": "^8.2.4",
     "node": "^20.15.0",
     "pg": "^8.12.0",
     "pool": "^0.4.1",
     "require": "^2.4.20",
-    "update": "^0.7.4"    
+    "update": "^0.7.4"
   }
 }
