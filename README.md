@@ -29,13 +29,11 @@ This assignment is not deployed and was submitted as requested via video demonst
         ├──Example of View All departments.png
         ├──assets/Example of View All Roles.png
         ├──assets/Example View All Employees.png
-        ├──assets/Main Run - Nod index.js.png
     ├── develop/                
         ├── db/
             ├── queries.sql
             ├── schema.sql
             ├── seeds.sql              
-        ├── server.js  
     ├── node_modules/           
     ├── .gitignore          
     ├── index.js    
@@ -96,7 +94,7 @@ THEN I am prompted to select an employee to update and their new role and this i
     2. Install the packages below to practice connecting to your server and databases
     3. Open the integrated terminal in your code editor
     4. Make sure you're in the correct path, copy the parent folder that your .sql files live in
-    5. Connect to your POSTGRES SERVER by entering the command **psql -U postgres** and the password you created when initially installing the Postgres local server
+    5. Connect to your POSTGRES SERVER by entering the command **psql -U postgres** or **psql -d postgres** and the password you created, when initially installing the Postgres local server
     6. Run the command **\list** to see what databases you have already
     7. Execute the statments listed inside the schema.sql file, using the command **\i schema.sql**
     8. You'll need to seed your data, use the command \i seeds.sql
@@ -107,7 +105,6 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ### Technical Details
 - > Node Package Manager - 'npm i node'
-- > Express, Node JS Framework - 'npm install express'
 - > Inquirer@8.2.4, NPM package - 'npm install Inquirer@8.2.4'
 - > PG Package, a non-blocking PostgreSQL client for Node - 'npm install pg'
 - > Postgres
