@@ -76,17 +76,14 @@ THEN I am prompted to select an employee to update and their new role and this i
 [Back to Table of Contents](#table-of-contents)
 
 ## Appearance & Functionality 
-#### Node Index.js - First CLI Display
-![Main Run of Application](./assets/Main%20Run%20of%20Node%20index.js.png)
-
 #### View All Departments Example
-![View All Departments Example](./assets/Example%20of%20View%20All%20Departments.png)
+>![View All Departments Example](./assets/Example%20of%20View%20All%20Departments.png)
 
 #### View All Roles Example
-![View All Roles Example](./assets/Example%20of%20View%20All%20Roles.png)
+>![View All Roles Example](./assets/Example%20of%20View%20All%20Roles.png)
 
 #### View All Employees Example
-![View All Employees Example](./assets/Example%20View%20All%20Employees.png)
+>![View All Employees Example](./assets/Example%20View%20All%20Employees.png)
 
 [Back to Table of Contents](#table-of-contents)
 
