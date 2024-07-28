@@ -6,7 +6,7 @@ Employee Tracker System is built via a command-line application from scratch, to
 
 ## Walkthrough Video
 This assignment is not deployed and was submitted as requested via video demonstration, see below:
-- [Video Demo](https://drive.google.com/file/d/15rvslFZB9807FZFkwcwFUZ_WnMEYsVv5/view?usp=sharing)
+- [Video Demo](https://drive.google.com/file/d/192C38E9PJpaPStWaz4n9qio4L7v-vUFC/view?usp=sharing)
 
 ## Tracker Up - README.MD
 ### Table of Contents:

@@ -1,13 +1,14 @@
 
 -- this file contains the creation of multiple rows for my table, initially created in my query schema.sql
  -- inserts data into my departments table 
-INSERT INTO department (department_name, id)
-VALUES  ('Web Development', 1), 
-        ('Finance', 2), 
-        ('Customer Services', 3), 
-        ('Marketing', 4), 
-        ('Operations', 5), 
-        ('Administration', 6);
+INSERT INTO department (name, department_name)
+VALUES  ('Web Dev', 'Web Development'), 
+        ('Fin', 'Finance'), 
+        ('CustServ', 'Customer Services'), 
+        ('Mktg', 'Marketing'), 
+        ('Ops', 'Operations'), 
+        ('Admin', 'Administration');
+
 
 INSERT INTO manager (id, name, department_id)
 VALUES ('87', 'Ryan Able', 1),  -- Web Development
@@ -33,20 +34,22 @@ VALUES ('Customer Services Agent', 80000, 3),  -- Customer Services
             
 
 -- inserts data into my employees table 
-INSERT INTO employee (first_name, last_name, id)
-    VALUES  ('Rhianna', 'Wilson', 1),
-            ('Jessica', 'Walker', 2),
-            ('Peter', 'Matthews', 3),
-            ('Jack', 'Williams', 4),
-            ('George', 'Peters', 5),
-            ('Jane', 'Doe', 6),
-            ('Sarah', 'Southland', 7),
-            ('Matt', 'Jeffery', 8),
-            ('Manuela', 'Tiang', 9), 
-            ('Dan', 'Ryi', 10),
-            ('Kate', 'Maoun', 11),
-            ('Jeffery', 'Smithers', 12),
-            ('Emily', 'Keenes', 13);
+-- Corrected seeds.sql file without manually inserting the id column
+INSERT INTO employee (first_name, last_name, role_id, manager_id, department_id)
+    VALUES  ('Rhianna', 'Wilson', NULL, NULL, NULL),
+            ('Jessica', 'Walker', NULL, NULL, NULL),
+            ('Peter', 'Matthews', NULL, NULL, NULL),
+            ('Jack', 'Williams', NULL, NULL, NULL),
+            ('George', 'Peters', NULL, NULL, NULL),
+            ('Jane', 'Doe', NULL, NULL, NULL),
+            ('Sarah', 'Southland', NULL, NULL, NULL),
+            ('Matt', 'Jeffery', NULL, NULL, NULL),
+            ('Manuela', 'Tiang', NULL, NULL, NULL), 
+            ('Dan', 'Ryi', NULL, NULL, NULL),
+            ('Kate', 'Maoun', NULL, NULL, NULL),
+            ('Jeffery', 'Smithers', NULL, NULL, NULL),
+            ('Emily', 'Keenes', NULL, NULL, NULL);
+
 
 INSERT INTO employeeRole (first_name, last_name, manager_id, role_id)
 VALUES ('Rhianna', 'Wilson', 1, 3),  -- Ryan Able, Full Stack Engineer

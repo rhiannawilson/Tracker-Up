@@ -8,9 +8,10 @@ CREATE DATABASE employeeinventory_db;
 
 -- creates the table departments within employeeInventory_db
 CREATE TABLE department (
-    id SERIAL PRIMARY KEY, 
-    department_name VARCHAR (30) NOT NULL
-);
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    department_name TEXT
+    );
 
 CREATE TABLE manager (
     id SERIAL PRIMARY KEY,
@@ -29,8 +30,8 @@ CREATE TABLE role (
 -- -- creates the table employees within employeeInventory_db
 CREATE TABLE employee (
     id SERIAL PRIMARY KEY, 
-    first_name VARCHAR (50) NOT NULL,
-    last_name VARCHAR (50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     role_id INTEGER,
     manager_id INTEGER,
     department_id INTEGER, 
@@ -38,6 +39,7 @@ CREATE TABLE employee (
     FOREIGN KEY (manager_id) REFERENCES manager(id) ON DELETE SET NULL,
     FOREIGN KEY (department_id) REFERENCES department(id)
 );
+
 -- creates the table employees and their roles 
 CREATE TABLE employeeRole (
     id SERIAL PRIMARY KEY,

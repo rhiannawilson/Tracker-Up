@@ -2,7 +2,6 @@
 // initializes the application, handles user prompts, 
 // and calls functions from server.js based on user input.
 
-const fs = require("fs");
 const inquirer = require("inquirer");
 const colors = require('colors');
 const { prompt } = require('inquirer');
@@ -69,7 +68,7 @@ function loadMainPrompts() {
       case 'VIEW_ROLES':
         viewRoles();
       case 'ADD_DEPARTMENT':
-        addDepartment();
+        addDepartment(); 
         break;
       case 'REMOVE_DEPARTMENT':
         removeDepartment();
@@ -152,7 +151,7 @@ function viewRoles() {
 
 
 function addRole() {
-  inquirer.prompt([
+  prompt([
     {
       type: 'input',
       name: 'title',
@@ -172,7 +171,7 @@ function addRole() {
       console.table(departments);
 
       // Prompt for department_id after displaying departments
-      return inquirer.prompt([
+      return prompt([
         {
           type: 'input',
           name: 'department_id',
@@ -220,7 +219,7 @@ function removeRole() {
     console.table(roles);
 
     // Prompt for the role ID to remove
-    return inquirer.prompt([
+    return prompt([
       {
         type: 'input',
         name: 'role_id',
@@ -256,8 +255,7 @@ function removeRole() {
 
 // Function to add an employee
 function addEmployee() {
-  // Prompt user for employee details
-  prompt([
+  inquirer.prompt([
     {
       type: 'input',
       name: 'first_name',
@@ -267,44 +265,51 @@ function addEmployee() {
       type: 'input',
       name: 'last_name',
       message: 'Enter the last name of the employee:'
+    },
+    {
+      type: 'input',
+      name: 'role_id',
+      message: 'Enter the role ID for the employee (or leave blank):'
+    },
+    {
+      type: 'input',
+      name: 'manager_id',
+      message: 'Enter the manager ID for the employee (or leave blank):'
+    },
+    {
+      type: 'input',
+      name: 'department_id',
+      message: 'Enter the department ID for the employee (or leave blank):'
     }
-    // {
-    //   type: 'input',
-    //   name: 'role.title',
-    //   message: 'Enter to assign a new role ID for the employee:'
-    // },
-    // {
-    //   type: 'input',
-    //   name: 'manager_id',
-    //   message: 'Enter to assign a new manager ID for the employee:'
-    // }
   ]).then((answers) => {
-    const { first_name, last_name } = answers;
+    const { first_name, last_name, role_id, manager_id, department_id } = answers;
 
-    // // Validate inputs and convert role_id and manager_id to integers if provided
-    // const roleId = parseInt(role_id, 18) || null;
-    // const managerId = parseInt(manager_id, 18) || null;
+    // Convert empty strings to null
+    const role_id_value = role_id ? parseInt(role_id) : null;
+    const manager_id_value = manager_id ? parseInt(manager_id) : null;
+    const department_id_value = department_id ? parseInt(department_id) : null;
 
-    // SQL query to insert employee into database
-    const sql = 'INSERT INTO employee (first_name, last_name) VALUES ($1, $2)';
-    const values = [first_name, last_name];
+    // SQL query to insert employee into the database
+    const sql = `
+      INSERT INTO employee (first_name, last_name, role_id, manager_id, department_id)
+      VALUES ($1, $2, $3, $4, $5)
+    `;
+    const values = [first_name, last_name, role_id_value, manager_id_value, department_id_value];
 
-    // Execute the query
     pool.query(sql, values)
       .then(() => {
         console.log(`\nEmployee '${first_name} ${last_name}' added successfully!\n`);
-        // Optionally, display all employees including the new one
-        viewEmployees();
+        loadMainPrompts(); // Return to main prompts after successful addition
       })
       .catch((err) => {
         console.error('Error adding employee:', err);
-        loadMainPrompts(); // Or handle errors as appropriate
+        loadMainPrompts(); // Handle errors as appropriate
       });
   }).catch((err) => {
     console.error('Error:', err);
-    loadMainPrompts(); // Or handle errors as appropriate
+    loadMainPrompts(); // Handle errors as appropriate
   });
-};
+}
 
 // Function to prompt for employee removal
 function removeEmployeePrompt() {
@@ -369,7 +374,6 @@ init();
 // FETCHING DATA FROM DATABASE
 // contains the logic to configure an Express server and manage database interactions.
 
-
 // Function to fetch all employees from the database
 async function findAllEmployees() {
   const sql = 'SELECT * FROM employee';
@@ -398,33 +402,41 @@ async function findAllManagers() {
   return result.rows;
 };
 
-// Function to add a department
 function addDepartment() {
-  prompt([
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Enter the short name of the department:'
+    },
     {
       type: 'input',
       name: 'department_name',
-      message: 'Enter the name of the department:'
+      message: 'Enter the full name of the department:'
     }
   ]).then((answers) => {
-    const { department_name } = answers;
+    const { name, department_name } = answers;
 
-    // Query to insert department into database
-    const sql = 'INSERT INTO department (department_name, id) VALUES ($1, $2)';
-    const values = [department_name, 7];
+    // SQL query to insert department into the database
+    const sql = 'INSERT INTO department (name, department_name) VALUES ($1, $2)';
+    const values = [name, department_name];
 
     pool.query(sql, values)
       .then(() => {
         console.log(`\nDepartment '${department_name}' added successfully!\n`);
-        // After adding, display all departments including the new one
-        viewDepartments();
+        return findAllDepartments().then((departments) => {
+          console.log('\nAll Departments:');
+          console.table(departments);
+          loadMainPrompts();
+        });
       })
       .catch((err) => {
         console.error('Error adding department:', err);
+        loadMainPrompts(); // Or handle errors as appropriate
       });
   }).catch((err) => {
     console.error('Error:', err);
-    loadMainPrompts(); // Assuming loadMainPrompts() handles restarting prompts
+    loadMainPrompts(); // Or handle errors as appropriate
   });
 }
 
@@ -445,7 +457,13 @@ function removeDepartment() {
       {
         type: 'input',
         name: 'department_id',
-        message: 'Enter the department ID to remove:'
+        message: 'Enter the department ID to remove:',
+        validate: (input) => {
+          if (!input || isNaN(input)) {
+            return 'Please enter a valid department ID.';
+          }
+          return true;
+        }
       }
     ]).then((answers) => {
       const { department_id } = answers;
@@ -472,7 +490,7 @@ function removeDepartment() {
     console.error('Error fetching departments:', err);
     loadMainPrompts(); // Handle errors as appropriate
   });
-};
+}
 
 
 // Function to fetch and display employees before removal
@@ -516,86 +534,110 @@ async function removeEmployee(employee_Id) {
     console.error('Error removing employee:', err);
     throw err;
   }
-};0
+};
 
-// Function to update an employee by ID
+
+function viewEmployees() {
+  const sql = 'SELECT * FROM employee';
+
+  return pool.query(sql)
+    .then((res) => {
+      console.table(res.rows);
+      return res.rows;
+    })
+    .catch((err) => {
+      console.error('Error fetching employees:', err);
+      throw err;
+    });
+}
+
 function updateEmployee() {
-  // Fetch and display all employees first
-  findAllEmployees().then((employees) => {
+  viewEmployees().then((employees) => {
     if (employees.length === 0) {
       console.log('\nNo employees available to update.\n');
       loadMainPrompts(); // Return to main prompts if no employees are available
       return;
     }
 
-    console.log('\nAll Employees:');
-    console.table(employees);
-
-    // Prompt for the employee ID to update
-    return inquirer.prompt([
+    inquirer.prompt([
       {
         type: 'input',
         name: 'employee_id',
-        message: 'Enter the employee ID to update:'
+        message: 'Enter the ID of the employee to update:'
+      },
+      {
+        type: 'input',
+        name: 'first_name',
+        message: 'Enter the new first name of the employee (leave blank to keep current):'
+      },
+      {
+        type: 'input',
+        name: 'last_name',
+        message: 'Enter the new last name of the employee (leave blank to keep current):'
+      },
+      {
+        type: 'input',
+        name: 'role_id',
+        message: 'Enter the new role ID for the employee (leave blank to keep current):'
+      },
+      {
+        type: 'input',
+        name: 'manager_id',
+        message: 'Enter the new manager ID for the employee (leave blank to keep current):'
+      },
+      {
+        type: 'input',
+        name: 'department_id',
+        message: 'Enter the new department ID for the employee (leave blank to keep current):'
       }
     ]).then((answers) => {
-      const { employee_id } = answers;
+      const { employee_id, first_name, last_name, role_id, manager_id, department_id } = answers;
 
-      // Fetch and display details of the selected employee
-      const sql = 'SELECT * FROM employee WHERE id = $1';
-      const values = [employee_id];
+      // Create an array to store the fields to be updated
+      const fields = [];
+      const values = [];
 
-      return pool.query(sql, values)
-        .then((result) => {
-          if (result.rows.length === 0) {
-            console.log('\nNo employee found with that ID.\n');
-            loadMainPrompts(); // Return to main prompts if employee ID is not found
-            return;
-          }
+      if (first_name) {
+        fields.push('first_name = $' + (fields.length + 1));
+        values.push(first_name);
+      }
+      if (last_name) {
+        fields.push('last_name = $' + (fields.length + 1));
+        values.push(last_name);
+      }
+      if (role_id) {
+        fields.push('role_id = $' + (fields.length + 1));
+        values.push(parseInt(role_id) || null);
+      }
+      if (manager_id) {
+        fields.push('manager_id = $' + (fields.length + 1));
+        values.push(parseInt(manager_id) || null);
+      }
+      if (department_id) {
+        fields.push('department_id = $' + (fields.length + 1));
+        values.push(parseInt(department_id) || null);
+      }
 
-          const employee = result.rows[0];
+      // If no fields to update, return early
+      if (fields.length === 0) {
+        console.log('No updates were provided.');
+        loadMainPrompts();
+        return;
+      }
 
-          // Prompt for updated employee information
-          return inquirer.prompt([
-            {
-              type: 'input',
-              name: 'first_name',
-              message: `Enter the new first name (current: ${employee.first_name}):`,
-              default: employee.first_name
-            },
-            {
-              type: 'input',
-              name: 'last_name',
-              message: `Enter the new last name (current: ${employee.last_name}):`,
-              default: employee.last_name
-            }
-          ]).then((updates) => {
-            const { first_name, last_name } = updates;
+      // Add employee_id to the values array
+      values.push(parseInt(employee_id));
 
-            // SQL query to update the employee in the database
-            const updateSql = `
-              UPDATE employee 
-              SET first_name = $1, last_name = $2
-              WHERE id = $3
-            `;
-            const updateValues = [first_name, last_name, employee_id];
+      // Create the SQL update statement
+      const sql = `UPDATE employee SET ${fields.join(', ')} WHERE id = $${fields.length + 1}`;
 
-            // Execute the query
-            return pool.query(updateSql, updateValues)
-              .then(() => {
-                console.log(`\nEmployee with ID '${employee_id}' updated successfully!\n`);
-                loadMainPrompts(); // Return to main prompts after successful update
-              })
-              .catch((err) => {
-                console.error('Error updating employee:', err);
-                loadMainPrompts(); // Handle errors as appropriate
-              });
-          }).catch((err) => {
-            console.error('Error:', err);
-            loadMainPrompts(); // Handle errors as appropriate
-          });
-        }).catch((err) => {
-          console.error('Error fetching employee details:', err);
+      pool.query(sql, values)
+        .then(() => {
+          console.log(`\nEmployee with ID '${employee_id}' updated successfully!\n`);
+          loadMainPrompts(); // Return to main prompts after successful update
+        })
+        .catch((err) => {
+          console.error('Error updating employee:', err);
           loadMainPrompts(); // Handle errors as appropriate
         });
     }).catch((err) => {
@@ -606,4 +648,4 @@ function updateEmployee() {
     console.error('Error fetching employees:', err);
     loadMainPrompts(); // Handle errors as appropriate
   });
-};
+}
